@@ -25,10 +25,9 @@ class IncomingCallReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val phoneNumber = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER) ?: return
 
-        // 테스트 용으로 OFFHOOK 상태에서만 동작하도록 함
         when (intent.getStringExtra(TelephonyManager.EXTRA_STATE)) {
-            TelephonyManager.EXTRA_STATE_OFFHOOK -> context.createOverlay(phoneNumber)
-            TelephonyManager.EXTRA_STATE_IDLE -> context.removeOverlay()
+            TelephonyManager.EXTRA_STATE_RINGING -> context.createOverlay(phoneNumber)
+            TelephonyManager.EXTRA_STATE_OFFHOOK -> context.removeOverlay()
         }
     }
 
